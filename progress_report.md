@@ -48,3 +48,15 @@ A similar format has been followed for the reddit dataset that I am creating, lo
 
 The groups are equally represented.
 
+
+## 2nd Progress Report
+
+### Analysis
+
+Added scripts in `scripts` for syntactic and lexical analysis of features that I thought would be useful for my analysis, as well as feature engineering for a classification model. There is a file, `analyze_text.ipynb` that uses these modules to analyze a piece of sample text as proof of concept -- these features will be applied to the dataframe as a whole.
+
+There is further data that I have gathered using scripts in `scripts/` and have csv files in a folder that is in my `.gitignore`. I have not preprocessed it or decided how to use it. (haven't had enough time).
+
+And the license --
+
+I have decided to use the MIT license for my repository because I think the project should be open-source, and I want to indirectly collaborate with others and get improvements to my code (there is definitely a ton of room for improvement). The MIT license is a permissive license that allows people to do pretty much whatever they want with my code, as long as they include a copy of the license.

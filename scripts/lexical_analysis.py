@@ -62,21 +62,14 @@ def calculate_question_ratio(text):
     return question_count / punct_count
 
 
-def analyze_punctuation(text):
+def analyze(text):
     """
-    Analyzes the punctuation in the given text and returns features
+    returns everything
     """
-    punct_count = count_punctuation(text)
-    punct_density = calculate_punct_density(text)
-    exclamation_ratio = calculate_exclamation_ratio(text)
-    question_ratio = calculate_question_ratio(text)
-    double_spaces = count_double_spaces(text)
-
-    # return a dictionary containing the calculated features
     return {
-        "punct_count": punct_count,
-        "punct_density": punct_density,
-        "exclamation_ratio": exclamation_ratio,
-        "question_ratio": question_ratio,
-        "double_spaces": double_spaces
-        }
+        "punct_count": count_punctuation(text),
+        "punct_density": calculate_punct_density(text),
+        "exclamation_ratio": calculate_exclamation_ratio(text),
+        "question_ratio": calculate_question_ratio(text),
+        "double_spaces": count_double_spaces(text),
+    }
