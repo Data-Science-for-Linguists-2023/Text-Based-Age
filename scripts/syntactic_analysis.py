@@ -67,7 +67,7 @@ def word_freqs(text):
 
 def analyze(text):
     """
-    Analyzes the given text and returns a dictionary containing the results of various analysis functions.
+    returns everything
     """
     return {
         "sentence_lengths": analyze_sentence_length(text),
