@@ -1,30 +1,26 @@
+import spacy
 import string
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.stem import WordNetLemmatizer
-from sklearn.feature_extraction.text import CountVectorizer
-import numpy as np
+from collections import Counter
 
+nlp = spacy.load("en_core_web_sm")
 
 def analyze_sentence_length(text):
     """
     tokenizes into sentences and returns list of lengths
     """
-    sentences = sent_tokenize(text)
-    sentence_lengths = [len(sent) for sent in sentences]
+    doc = nlp(text)
+    sentence_lengths = [len(sent) for sent in doc.sents]
     return sentence_lengths
 
 
 def analyze_words(text):
     """
-    tokenizes into words and returns the vocabulary size (lemmatization and stopword removal)
-    need to experiment with lemmatize and stopword removal -> they might actually be relevant features
+    tokenizes into words and returns the vocabulary size
     """
-    lemmatizer = WordNetLemmatizer()
-    tokens = [lemmatizer.lemmatize(token.lower()) for token in word_tokenize(text) if token.lower() not in stopwords.words('english') and token not in string.punctuation]
-    vocabulary = set(tokens)
-    return len(vocabulary)
+    doc = nlp(text)
+    tokens = [token.lemma_.lower() for token in doc if not token.is_stop and not token.is_punct and not token.is_space]
+    vocabulary_size = len(set(tokens))
+    return vocabulary_size
 
 
 def analyze_syntax(text):
@@ -33,36 +29,28 @@ def analyze_syntax(text):
     applies POS tagging
     returns a dictionary containing frequency count of each tag
     """
-    lemmatizer = WordNetLemmatizer()
-    tokens = [lemmatizer.lemmatize(token.lower()) for token in word_tokenize(text) if token.lower() not in stopwords.words('english') and token not in string.punctuation]
-    tags = nltk.pos_tag(tokens)
-    tag_counts = {}
-    for tag in tags:
-        if tag[1] not in tag_counts:
-            tag_counts[tag[1]] = 1
-        else:
-            tag_counts[tag[1]] += 1
+    doc = nlp(text)
+    tag_counts = Counter([token.pos_ for token in doc if not token.is_stop and not token.is_punct and not token.is_space])
     return tag_counts
+
 
 def analyze_caps(text):
     """
     tokenizes into words and identifies capitalized words
     """
-    lemmatizer = WordNetLemmatizer()
-    tokens = [lemmatizer.lemmatize(token.lower()) for token in word_tokenize(text) if token.lower() not in stopwords.words('english') and token not in string.punctuation]
-    capitalized_words = [word for word in tokens if word[0].isupper()]
+    doc = nlp(text)
+    capitalized_words = [token.text for token in doc if token.text.isupper() and not token.is_stop and not token.is_punct and not token.is_space]
     return capitalized_words
+
 
 def word_freqs(text):
     """
     tokenizes into words and counts the frequency of each word
     """
-    vectorizer = CountVectorizer(stop_words='english')
-    doc_term_matrix = vectorizer.fit_transform([text])
-    word_frequencies = np.asarray(doc_term_matrix.sum(axis=0))
-    word_frequencies = dict(zip(vectorizer.vocabulary_, word_frequencies[0]))
+    doc = nlp(text)
+    words = [token.lemma_.lower() for token in doc if not token.is_stop and not token.is_punct and not token.is_space]
+    word_frequencies = dict(Counter(words))
     return word_frequencies
-
 
 
 def analyze(text):

@@ -60,3 +60,32 @@ There is further data that I have gathered using scripts in `scripts/` and have 
 And the license --
 
 I have decided to use the MIT license for my repository because I think the project should be open-source, and I want to indirectly collaborate with others and get improvements to my code (there is definitely a ton of room for improvement). The MIT license is a permissive license that allows people to do pretty much whatever they want with my code, as long as they include a copy of the license.
+
+## 3rd Progress Report
+
+### Data
+
+During the last progress report, there were 2 aspects to the data --
+
+- The Blog Authorship Corpus 
+    - This is a ready-to-use dataset, so apart from conversion and standard preprocessing to the use case, there is no need for further work.
+- The Reddit dataset
+    - This had some initial exploration, but was largely "in-the-works", meaning the scripts to fetch the data were there, but there was little planning around the actual structure which it was going to take.
+
+Since the last progress report, there has been a ton of work on the data acquisition part of this. I made a couple of decisions that form the data's key aspects, as follows:
+
+- The subreddits being used are `r/AskTeenBoys`and `r/AskTeenGirls` for teens, `r/LifeAfterSchool` and `r/College` for twenties, and `r/AskMenOver30` and `r/AskWomenOver30` for thirty plus.
+- I couldn't form more accurate data for age groups, due to lack of widely available data for specific ages like twenties and thirties only, hence I found data groups that tends to be used by people who are closer to their 20s (as in `r/College`) and 30+ year olds (as in `r/AskMenOver30` and `r/AskWomenOver30`). There might be 18 year olds who use `r/College`, but I do think that it should be a seperate category anyway, since they more closely resemble 20-something year olds rather than early teenagers.
+- I am using comments, not post text. This is because in a "ask an X year old", the main text might not be someone that age. Plus, links, news headlines, meme text etc. tend to be used as main text, which makes comments more distinctive of the category anyway.
+
+I ran the data pipeline on all of the data and attempted to get over 10k data points for each subreddit -- so 20k per category. I anticipate noise and very short comments so I gathered 15k-20k within each category anyway to get a worst-case scenario fault tolerance of 50%. This took 60+ hours to run on my machine with 16GB DDR4 RAM, a large part of which was API rate limits. (I am very happy that I have a spare computer lying around)
+
+I left the raw data in `reddit_data/`. Since this is new data that isn't technically mine, I looked into licensing and couldn't find much. Reddit doesn't specify licensing on data obtained through it's API, especially comments. I looked through forums and everyone else also seems to be confused. There also isn't a UUID linking comments to users in my data, so I went ahead and added it under the repo's MIT license.
+
+### Analysis
+
+Since the data is raw, I made sure to do some EDA, as I preprocessed the dataset, which can be found in `notebooks/dataset_extraction/process_reddit_dataset.ipynb`. I also saved the mostly final data in a pickled format in `data_samples/reddit_samples/all.pkl`.
+
+There is more EDA in `notebooks/dataset_analysis`.
+
+I also did update the analysis functions left in the feedback to use SpaCy instead of NLTK. I also am shifting to N-grams based on the feedback anyway, but I just wanted to close the loop on it. Plus, I might need it at some point later.
