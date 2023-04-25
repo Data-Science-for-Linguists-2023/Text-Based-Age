@@ -1,7 +1,9 @@
 # Text-Based-Age-Recognition
 
 Name: Varun Venkatesh
+
 Email: vav30@pitt.edu
+
 Date: 04/25/2023
 
 ## Description
@@ -19,7 +21,7 @@ The project also involves the collection, processing, and usage of a custom redd
 
 - [**`final_report.md`**](final_report.md) : A report detailing the final results of the project
 - [`progress_report.md`](progress_report.md): A report detailing the progress made, with steps, process, timeline, etc.
-- [`data/`](data/): Contains the raw data files as well as processed data files after preprocessing
+- [`data_samples/`](data_samples/): Contains the raw data files as well as processed data samples
 - [`scripts/`](scripts/): Contains Python scripts for various tasks (preprocessing, feature extraction, model training, and model evaluation)
 - [`notebooks/`](notebooks/): Contains iPython Notebooks (Jupyter) for the main work like discovery, processing, EDA, analysis, etc.
 
