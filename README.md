@@ -1,4 +1,4 @@
-# Text-Based-Age-Recognition
+# Linguistic Features for Age Detection in Text
 
 Name: Varun Venkatesh
 
@@ -14,7 +14,7 @@ This project aims to find markers of age within blog posts using The Blog Author
 
 The "found" dataset used for this project is the [Blog Authorship Corpus](https://u.cs.biu.ac.il/~koppel/BlogCorpus.htm), which contains over 600,000 posts written on a wide range of topics. The dataset is available on Kaggle and was originally compiled by Dr. Jichan Zeng at the University of Illinois at Urbana-Champaign. 
 
-The project also involves the collection, processing, and usage of a custom reddit dataset that is divided into age groups. More info can be found [here](https://github.com/Data-Science-for-Linguists-2023/Text-Based-Age-Recognition/blob/main/progress_report.md#3rd-progress-report), as well as the `reddit_data/` folder.
+The project also involves the collection, processing, and usage of a custom reddit dataset that is divided into age groups. More info can be found [here](https://github.com/Data-Science-for-Linguists-2023/Text-Based-Age-Recognition/blob/main/progress_report.md#3rd-progress-report), as well as the [`reddit_data/`](reddit_data/) folder.
 
 
 ## Important Files and Folders
